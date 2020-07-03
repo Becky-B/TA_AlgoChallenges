@@ -125,7 +125,7 @@ class SLList {
     // Contains
     contains(value) {
         if(this.head == null){
-            return false;
+            return null;
         }
         let runner = this.head;
         while(runner != null) {
@@ -136,3 +136,44 @@ class SLList {
         }
         return false;
     }
+
+    removeFromFront() {
+        if(this.head == null){
+            return null;
+        }
+        var temp = this.head;
+        this.head = this.head.next;
+        return temp;
+    }
+
+    front(){
+        if(this.head == null){
+            return null;
+        }
+        console.log(this.head.value)
+        return this;
+    }
+
+    printList() {
+        if(this.head == null) {
+            console.log("The list is empty.");
+            return this;
+        }
+        let str = "H: ";
+        let runner = this.head;
+        while(runner != null) {
+            str += `${runner.value} -> `
+            runner = runner.next;
+        }
+        console.log(str);
+        return this;
+    }
+}
+
+let MyList = new SLList();
+MyList.addToFront(4);
+MyList.addToFront(80);
+MyList.addToFront(12);
+MyList.front();
+MyList.printList();
+
