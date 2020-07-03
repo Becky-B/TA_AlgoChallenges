@@ -116,7 +116,7 @@ class SLList {
 
      // Add to front
     addToFront(value) {
-        var newNode = new SLNode(value);
+        let newNode = new SLNode(value);
         newNode.next = this.head;
         this.head = newNode;
         return this;
@@ -141,7 +141,7 @@ class SLList {
         if(this.head == null){
             return null;
         }
-        var temp = this.head;
+        let temp = this.head;
         this.head = this.head.next;
         return temp;
     }
@@ -153,6 +153,111 @@ class SLList {
         console.log(this.head.value)
         return this;
     }
+
+    back(){
+        if(this.head == null){
+            return null;
+        }
+        else if (this.head.next == null){
+            return this.value;
+        }
+        let walker = null;
+        let runner = this.head;
+        while(runner.next != null){
+            walker = runner;
+            runner = runner.next;
+        }
+        console.log(runner.value)
+        return this;
+    }
+
+    removeFromBack(){
+        if(this.head == null){
+            return null;
+        }
+        else if (this.head.next == null){
+            return this.value;
+        }
+        let walker = null;
+        let runner = this.head;
+        while (runner.next != null){
+            walker = runner;
+            runner = runner.next;
+        }
+        walker.next = null;
+        return this;
+    }
+
+
+    addToBack(value){
+        let newNode = new SLNode(value);
+        if(this.head == null){
+            newNode.next = this.head;
+            this.head = newNode;
+            return this;
+        }
+        let walker = null;
+        let runner = this.head;
+        while (runner.next != null){
+            walker = runner;
+            runner = runner.next;
+        }
+        runner.next = newNode;
+        return this;
+    }
+
+    minToFront(){
+        if(this.head == null){
+            console.log("This list is empty");
+            return this;
+        }
+        let walker = null;
+        let runner = this.head;
+        let min = this.head;
+        let minprev = null;
+        while(runner.next != null) {
+            if(runner.value < min.value) {
+                min = runner;
+                minprev = walker;
+            }
+            walker = runner;
+            runner = runner.next;
+        }
+        if(min == this.head) {
+            return this;
+        }
+        minprev.next = min.next;
+        min.next = this.head;
+        this.head = min;
+        return this;
+    }
+
+    maxToBack(){
+        if(this.head == null){
+            console.log("This list is empty");
+            return this;
+        }
+        let walker = null;
+        let runner = this.head;
+        let max = this.head;
+        let maxprev = null;
+        while(runner.next != null) {
+            if(runner.value > max.value){
+                max = runner;
+                maxprev = walker;
+            }
+            walker = runner;
+            runner = runner.next;
+        }
+        // console.log(maxprev.next)
+        console.log(maxprev)
+        maxprev.next = max.next;
+        console.log(max)
+        maxprev.next.next = max; // This is the only line of code that isn't working, and I'm not completely sure
+                                // or what I'm missing. 
+        return this;
+    }
+
 
     printList() {
         if(this.head == null) {
@@ -173,7 +278,15 @@ class SLList {
 let MyList = new SLList();
 MyList.addToFront(4);
 MyList.addToFront(80);
+MyList.addToFront(5);
 MyList.addToFront(12);
+MyList.addToFront(24);
 MyList.front();
+MyList.back();
+MyList.removeFromBack();
+MyList.back();
+MyList.addToBack(43);
+MyList.minToFront();
+MyList.maxToBack();
 MyList.printList();
 
